@@ -35,108 +35,85 @@ label.error {
 
 			<div class="col-3 mt-2">
 
-				<h2>Película</h2>
-				<form th:action="@{/pelicula/guardar}" id="formulario" th:object="${pelicula}" method="post">
+				<h2>Reservación</h2>
+				<form th:action="@{/reservacion/guardar}" id="formulario" th:object="${reservacion}" method="post">
 
-					<div class="form-group mt-2" hidden >
-
+					<div class="form-group mt-2" hidden>
 						<label for="floatingInputValue">ID :</label> <input
-						type="text" class="form-control"  id="idpeli"
-							placeholder="P0000" th:field="*{idpeli}"  autocomplete="off">
-
+							type="text" class="form-control" id="idreservacion"
+							placeholder="P0000" th:field="*{idreservacion}" autocomplete="off">
 					</div>
-					
-						<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Titulo :</label> <input
-							type="text" class="form-control" id="titulo"
-							placeholder="Nombre de la pelicula" th:field="*{titulo}" autocomplete="off">
-
-					</div>
-
 
 					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Tipo de Pelicula :</label> 
-						<select id="inputType" class="form-select" aria-label="Default select example" th:field = "*{tipopeli}">
-						<option selected value="-1">[Seleccionar]</option>
-							<option th:each = "p: ${listadoTipoPelicula}"
-									th:value = "${p.idtipo}"
-									th:text = "${p.desctipo}">
+						<label for="floatingInputValue">Peliculas :</label>
+						<select id="pelicula" class="form-select" aria-label="Default select example"
+								th:field="*{pelicula}">
+							<option selected value="-1">[Seleccionar]</option>
+							<option th:each="p: ${listadoPeliculas}"
+									th:value="${p.idpeli}"
+									th:text="${p.titulo}">
 							</option>
 						</select>
-							<span class="text-danger" th:text="${validacion}"></span>
-					</div>
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Fecha de Estreno :</label> 
-						<input  required="required" type= "date" class="form-control" id="fechaestreno"
-							placeholder="Fecha de estreno" th:field="*{fechaestreno}" autocomplete="off">
-
+						<span class="text-danger" th:text="${validacion}"></span>
 					</div>
 
 					<div class="form-group mt-2">
+						<label for="floatingInputValue">ID Cliente :</label> <input
+							type="text" class="form-control" id="cliente"
+							placeholder="Codigo de Cliente" th:field="*{idcliente}" autocomplete="off">
+					</div>
 
-						<label for="floatingInputValue">Fecha final :</label> 
-						<input required="required" type= "date" class="form-control" id="fechafinal"
-							placeholder="Fecha final" th:field="*{fechafinal}" autocomplete="off">
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">Tipo de Reserva :</label>
+						<select id="tiporeserva" class="form-select" aria-label="Default select example"
+								th:field="*{tiporeservacion}">
+							<option selected value="-1">[Seleccionar]</option>
+							<option th:each="p: ${listadoTipoReserv}"
+									th:value="${p.idreserva}"
+									th:text="${p.tiporeservacion}">
+							</option>
+						</select>
+						<span class="text-danger" th:text="${validacion}"></span>
+					</div>
 
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">Numero de Contacto para Reservación :</label>
+						<input required="required" type="text" class="form-control" id="numerocontacto"
+							   placeholder="Número telefonico" th:field="*{contactoreserva}" autocomplete="off">
 					</div>
 
 					<div class="form-group mt-2" >
+						<label for="floatingInputValue">Reserva :</label>
+						<select class="form-select" aria-label="Default select example" th:field="*{reserva}">
+							<option value=1>Reservado</option>
+						</select>
+					</div>
 
+
+					<div class="form-group mt-2" >
+						<label for="floatingInputValue">Pago :</label>
+						 <select class="form-select" aria-label="Default select example" th:field="*{pago}">
+							<option value=1>Confirmado</option>
+						</select>
+					</div>
+
+
+					<div class="form-group mt-2" >
 						<label for="floatingInputValue">Estado :</label>
-						 <select class="form-select" aria-label="Default select example" th:field="*{estado}">
+						<select class="form-select" aria-label="Default select example" th:field="*{estado}">
 							<option value="A">Activo</option>
 						</select>
-
 					</div>
+
 					<br/>
 					<div class="mt-2">
 						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
-						<a class="btn btn-secondary fw-bold" th:href="@{/pelicula/listado}">Refrescar</a>
+						<a class="btn btn-secondary fw-bold" th:href="@{/reservacion/listado}">Refrescar</a>
 					</div>
 				</form>
 				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary" role="alert" th:text="${mensajeCorrecto}"></div>
 			</div>
 			
-			<!--<div class="col-9">
-				<h1>Listado de Películas <span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span></h1>
-				<table class="table table-striped table-hover">
-					<thead >
-						<tr>
-							<th>ID</th>
-							<th>Título</th>
-							<th>Tipo Película</th> 
-							<th>Fecha de estreno</th>
-							<th>Fecha Final</th>
-							<th>Estado</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="p : ${listadoPelicula}">
-							<td th:text="${p.idpeli}"></td>		
-							<td th:text="${p.nombre}"></td>
-							<td th:text="${p.tipopelicula.desc_tipo}"></td>
-							<td th:text="${p.fecha_estreno}"></td>
-							<td th:text="${p.fecha_final}"></td>
-							<td th:text="${p.estado}"></td>
-							<td>
-							<a class="btn btn-info btn-sm "
-							th:href="@{/pelicula/editar/} + ${p.idpeli}"> <i class="fas fa-pen" style="color: white;" title="Editar"></i></a> 
-							<a class="btn btn-danger btn-sm sm-2" 
-							th:href="@{/pelicula/eliminar/} + ${p.idpeli}"> <i class="fas fa-trash" title="Eliminar"></i> </a>
-							</td>
-						</tr>
-							
-					</tbody>
-				</table>
-			</div>-->
-
-
 		</div>
 
 

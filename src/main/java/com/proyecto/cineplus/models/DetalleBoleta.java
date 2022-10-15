@@ -7,10 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="detalleboleta")
+//@Entity
+//@Table(name="detalleboleta")
 public class DetalleBoleta {
-
+/*
 	@Id
 	@Column(name = "cod_Deta_Bol")
 	private int codDetalleBol;
@@ -129,6 +129,6 @@ public class DetalleBoleta {
 		this.comestible = comestible;
 	}
 	
-	
+	*/
 	
 }

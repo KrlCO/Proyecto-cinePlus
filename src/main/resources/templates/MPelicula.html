@@ -38,7 +38,7 @@ label.error {
 				<h2>Película</h2>
 				<form th:action="@{/pelicula/guardar}" id="formulario" th:object="${pelicula}" method="post">
 
-					<div class="form-group mt-2">
+					<div class="form-group mt-2" hidden >
 
 						<label for="floatingInputValue">ID :</label> <input
 						type="text" class="form-control"  id="idpeli"
@@ -48,9 +48,9 @@ label.error {
 					
 						<div class="form-group mt-2">
 
-						<label for="floatingInputValue">Nombre :</label> <input
-							type="text" class="form-control" id="nombre"
-							placeholder="Nombre de la pelicula" th:field="*{nombre}" autocomplete="off">
+						<label for="floatingInputValue">Titulo :</label> <input
+							type="text" class="form-control" id="titulo"
+							placeholder="Nombre de la pelicula" th:field="*{titulo}" autocomplete="off">
 
 					</div>
 
@@ -58,11 +58,11 @@ label.error {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Tipo de Pelicula :</label> 
-						<select id="inputType" class="form-select" aria-label="Default select example" th:field = "*{tipo_peli}">
+						<select id="inputType" class="form-select" aria-label="Default select example" th:field = "*{tipopeli}">
 						<option selected value="-1">[Seleccionar]</option>
 							<option th:each = "p: ${listadoTipoPelicula}"
 									th:value = "${p.idtipo}"
-									th:text = "${p.desc_tipo}">
+									th:text = "${p.desctipo}">
 							</option>
 						</select>
 							<span class="text-danger" th:text="${validacion}"></span>
@@ -72,20 +72,20 @@ label.error {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Fecha de Estreno :</label> 
-						<input  required="required" type= "date" class="form-control" id="fecha_estreno"
-							placeholder="Fecha de estreno" th:field="*{fecha_estreno}" autocomplete="off">
+						<input  required="required" type= "date" class="form-control" id="fechaestreno"
+							placeholder="Fecha de estreno" th:field="*{fechaestreno}" autocomplete="off">
 
 					</div>
 
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Fecha final :</label> 
-						<input required="required" type= "date" class="form-control" id="fecha_final"
-							placeholder="Fecha final" th:field="*{fecha_final}" autocomplete="off">
+						<input required="required" type= "date" class="form-control" id="fechafinal"
+							placeholder="Fecha final" th:field="*{fechafinal}" autocomplete="off">
 
 					</div>
 
-					<div class="form-group mt-2" hidden>
+					<div class="form-group mt-2" >
 
 						<label for="floatingInputValue">Estado :</label>
 						 <select class="form-select" aria-label="Default select example" th:field="*{estado}">
@@ -102,7 +102,7 @@ label.error {
 				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary" role="alert" th:text="${mensajeCorrecto}"></div>
 			</div>
 			
-			<div class="col-9">
+			<!--<div class="col-9">
 				<h1>Listado de Películas <span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span></h1>
 				<table class="table table-striped table-hover">
 					<thead >
@@ -134,7 +134,7 @@ label.error {
 							
 					</tbody>
 				</table>
-			</div>
+			</div>-->
 
 
 		</div>

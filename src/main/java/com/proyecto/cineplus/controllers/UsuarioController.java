@@ -25,21 +25,29 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioRepository repo_usu;
 	
-	@GetMapping("/listado")
+	@GetMapping("/cargar")
 	
 	public String principal(Model model) {
 		RellenarGuardar(model, new Usuario());
 		
 		return "MUsuario";
 	}
+
+	@GetMapping("/listado")
+	public String agregaUsuario(Model model) {
+		model.addAttribute("usuarios", new Usuario());
+		model.addAttribute("listaUsuarios", repo_usu.findAll());
+		model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
+		return "ListUsuario";
+	}
 	
 	@PostMapping("/Guardar")
 	
 	public String guardarUsuario(@ModelAttribute Usuario usuarios, Model model) {
-		
+
 		try {
 			
-			Usuario usuario = repo_usu.findById(usuarios.getId()).get();
+			Usuario usuario = repo_usu.findById(usuarios.getIdusuario()).get();
 
 			RellenarGuardar(model, usuarios);
 			model.addAttribute("mensajeCorrecto","El ID del Usuario Existe");
@@ -51,7 +59,7 @@ public class UsuarioController {
 			if(datos != null) {
 				RellenarGuardar(model, usuarios);
 				model.addAttribute("mensajeCorrecto",datos);
-				return "MUsuario";
+				return "ListUsuario";
 			}else {
 				repo_usu.save(usuarios);
 				RellenarGuardar(model, new Usuario());
@@ -60,7 +68,7 @@ public class UsuarioController {
 			}
 		}
 		
-		return "MUsuario";
+		return "ListUsuario";
 	}	
 	
 	@GetMapping("/Mostrar/{id}")
@@ -94,7 +102,7 @@ public class UsuarioController {
 			}else {
 				RellenarEdit(model, usuarios);
 				model.addAttribute("mensajeCorrecto",datos);
-				return "MUsuario";
+				return "ListUsuario";
 			}
 		} catch (Exception e) {
 			RellenarEdit(model, usuarios);
@@ -123,24 +131,20 @@ public class UsuarioController {
 		} catch (Exception e) {
 			RellenarGuardar(model, new Usuario());
 			model.addAttribute("mensajeCorrecto","Error en desactivar usuario");
-			return "MUsuario";
+			return "ListUsuario";
 		}
 		
-		return "redirect:/usuario/listado";
+		return "redirect:/usuario/cargar";
 	}
 	
 	
 	private String formulario(Usuario usuario) {
 		
-		if(usuario.getId()==null || usuario.getId().isEmpty()) {
-			return "Error en el ID";
-		}else if(usuario.getNombre()==null || usuario.getNombre().isEmpty()) {
+		if(usuario.getNombre()==null || usuario.getNombre().isEmpty()) {
 			return "Error en el Nombre";
-		}else if(usuario.getDireccion()==null || usuario.getDireccion().isEmpty()) {
-			return "Error en la Dirección";
-		}else if(usuario.getTelefono()==null || usuario.getTelefono().isEmpty() || usuario.getTelefono().length() > 9 || usuario.getTelefono().length() < 9 ) {
-			return "Error en la Telefono";
-		}else if(usuario.getTipo_usuario() == -1) {
+		}else if(usuario.getApellidos() == null|| usuario.getApellidos().isEmpty() ) {
+			return "Error en los Apellidos";
+		}else if(usuario.getTipouser() == -1) {
 			return "Selecionar Tipo de Usuario.";
 		}else if(usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
 			return "Error en el Email";
@@ -155,7 +159,6 @@ public class UsuarioController {
 		model.addAttribute("estado_formulario","/usuario/Guardar");		
 		model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
 		model.addAttribute("listaUsuarios",repo_usu.findAll());
-		model.addAttribute("cantidad", repo_usu.findAll().size());
 		model.addAttribute("usuarios", usario);
 	}
 	

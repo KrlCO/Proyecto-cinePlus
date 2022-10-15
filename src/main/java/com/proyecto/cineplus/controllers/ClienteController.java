@@ -40,13 +40,20 @@ public class ClienteController {
 	
 	//variable auxiliar
 	private String estadoRecolectado;
-	
+
+	@GetMapping("/cargar")
+	public String abrirPagina(Model model) {
+		model.addAttribute("cliente", new Cliente());
+		model.addAttribute("listado",repo.findAll());
+		return "MCliente";
+	}
+
 	@GetMapping("/listado")
 	public String listadoCliente(Model model) {
 		model.addAttribute("listado", repo.findAll());
 		model.addAttribute("cliente", new Cliente());
 		model.addAttribute("cantidad", repo.findAll().size());
-		return "MCliente";
+		return "ListCliente";
 	}
 	
 	@PostMapping("/Guardar")
@@ -57,7 +64,7 @@ public class ClienteController {
 			model.addAttribute("listado", repo.findAll());
 			model.addAttribute("cliente", new Cliente());
 			model.addAttribute("cantidad", repo.count());
-			return "MCliente";
+			return "ListCliente";
 		}
 		return "redirect:/cliente/listado";
 	}
@@ -81,7 +88,7 @@ public class ClienteController {
 			return "RPCliente";
 		}
 		estadoRecolectado = estado;
-		model.addAttribute("listCliente", repo.findByEstado(estado));
+		//model.addAttribute("listCliente", repo.findByEstado(estado));
 		model.addAttribute("cantidad", repo.findAll().size());
 		return "RPCliente";
 	}
@@ -112,7 +119,7 @@ public class ClienteController {
 		Cliente obj = repo.findById(id).get();
 		
 		if (obj != null) {
-			obj.setEstado("I");
+			//obj.setEstado("I");
 			repo.save(obj);
 			model.addAttribute("listado", repo.findAll());
 			model.addAttribute("cantidad", repo.count());

@@ -27,15 +27,23 @@ public class ComestibleController {
 	
 	@Autowired
 	private IProveedorRepository repoIProveedorRepository;
-	
+
+	@GetMapping("/cargar")
+	public String abrirPagina(Model model) {
+		model.addAttribute("comestible", new Comestible());
+		model.addAttribute("listado", repoComestible.findAll());
+		model.addAttribute("cboComestible", repoTipoComestible.findAll());
+		return "MComestible";
+	}
+
 	@GetMapping("/listado")
 	public String listadoComestible(@ModelAttribute(name = "comestible") Comestible comestible,Model model) {
 		model.addAttribute("listado", repoComestible.findAll());
 		model.addAttribute("comestible", new Comestible());
 		model.addAttribute("cantidad", repoComestible.findAll().size());
 		model.addAttribute("cboComestible", repoTipoComestible.findAll());
-		model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
-		return "MComestible";
+		//model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
+		return "ListComestible";
 	}
 	
 	@PostMapping("/Guardar")
@@ -43,30 +51,30 @@ public class ComestibleController {
 		
 		if (comestible != null) {
 		
-			if (comestible.getIdTipo() == -1) {
+			if (comestible.getIdtipocomestible() == -1) {
 				model.addAttribute("validacion", "Seleccione un tipo comestible.");
 				model.addAttribute("cboComestible", repoTipoComestible.findAll());
 				model.addAttribute("listado", repoComestible.findAll());
 				model.addAttribute("cantidad", repoComestible.findAll().size());
 				model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
-				return "MComestible";
+				return "ListComestible";
 			}
 			
-			if (comestible.getIdProveedor() == -1) {
+/*			if (comestible.getIdProveedor() == -1) {
 				model.addAttribute("validacion2", "Seleccione un tipo Proveedor.");
 				model.addAttribute("cboComestible", repoTipoComestible.findAll());
 				model.addAttribute("listado", repoComestible.findAll());
 				model.addAttribute("cantidad", repoComestible.findAll().size());
 				model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
 				return "MComestible";
-			}
+			}*/
 			
 			repoComestible.save(comestible);
 			model.addAttribute("listado", repoComestible.findAll());
 			model.addAttribute("cboComestible", repoTipoComestible.findAll());
 			model.addAttribute("cantidad", repoComestible.findAll().size());
 			model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
-			return "MComestible";
+			return "ListComestible";
 		}
 		return "redirect:/comestible/listado";
 	}

@@ -8,5 +8,5 @@ import com.proyecto.cineplus.models.Cliente;
 
 public interface IClienteRepository extends JpaRepository<Cliente, Integer>{
 
-	public List<Cliente> findByEstado(String estado);
+	//public List<Cliente> findByEstado(String estado);
 }

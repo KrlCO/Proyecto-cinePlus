@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Listado de Usuarios</title>
+<title>Regsitro de Usuarios</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -31,10 +31,10 @@ label.error {
 				<form th:action="${estado_formulario}" id="formulario" method="post"
 					th:object="${usuarios}">
 
-					<div class="form-group mt-2">
+					<div class="form-group mt-2" hidden>
 
 						<label for="floatingInputValue">ID :</label> <input type="text"
-							class="form-control" id="id" placeholder="A0000" th:field="*{id}"
+							class="form-control" id="id" placeholder="A0000" th:field="*{idusuario}"
 							maxlength="6">
 
 					</div>
@@ -43,24 +43,15 @@ label.error {
 
 						<label for="floatingInputValue">Nombre :</label> <input
 							type="text" class="form-control" id="nombre"
-							placeholder="Nombre..." th:field="*{nombre}" maxlength="40">
+							placeholder="Nombre" th:field="*{nombre}" maxlength="40" autocomplete="off">
 
 					</div>
 
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">Teléfono :</label> <input
-							type="number" class="form-control" id="telefono"
-							placeholder="Teléfono..." th:field="*{telefono}">
-
-					</div>
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Dirección :</label> <input
-							type="text" class="form-control" id="direccion"
-							placeholder="Dirección..." th:field="*{direccion}"
-							maxlength="100">
+						<label for="floatingInputValue">Apellidos :</label> <input
+							type="text" class="form-control" id="apellidos"
+							placeholder="Apellidos" th:field="*{apellidos}" maxlength="40" autocomplete="off">
 
 					</div>
 
@@ -68,10 +59,10 @@ label.error {
 
 						<label for="floatingInputValue">Tipo Usuario :</label> <select
 							id="inputCat" class="form-select"
-							aria-label="Default select example" th:field="*{tipo_usuario}">
+							aria-label="Default select example" th:field="*{tipouser}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="c : ${listaTipoUsuario}"
-								th:value="${c.cod_tipo}" th:text="${c.desc_tipo}"></option>
+								th:value="${c.idtipo}" th:text="${c.desctipo}"></option>
 						</select>
 					</div>
 
@@ -79,7 +70,7 @@ label.error {
 
 						<label for="floatingInputValue">Correo :</label> <input
 							type="email" class="form-control" id="email"
-							placeholder="Correo..." th:field="*{email}" maxlength="50">
+							placeholder="Correo..." th:field="*{email}" maxlength="50" autocomplete="off">
 
 					</div>
 
@@ -87,11 +78,11 @@ label.error {
 
 						<label for="floatingInputValue">Contraseña :</label> <input
 							type="password" class="form-control" id="password"
-							placeholder="Contraseña..." th:field="*{password}" maxlength="50">
+							placeholder="Contraseña..." th:field="*{password}" maxlength="50" autocomplete="off">
 
 					</div>
 
-					<div class="form-group mt-2" hidden>
+					<div class="form-group mt-2" >
 
 						<label for="floatingInputValue">Estado :</label> <select
 							class="form-select" aria-label="Default select example"
@@ -111,18 +102,17 @@ label.error {
 					role="alert" th:text="${mensajeCorrecto}"></div>
 			</div>
 
-			<div class="col-9">
+			<!--<div class="col-9">
 				<h1>
-					Listado de Usuarios <span
-						class="badge rounded-pill bg-primary" th:text="${cantidad}"></span>
+					Listado de Usuarios
+&lt;!&ndash;					<span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span>&ndash;&gt;
 				</h1>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Nombre</th>
-							<th>Teléfono</th>
-							<th>Dirección</th>
+							<th>Apellidos</th>
 							<th>Tipo Usuario</th>
 							<th>Email</th>
 							<th>Estado</th>
@@ -131,25 +121,24 @@ label.error {
 					</thead>
 					<tbody>
 						<tr th:each="usu : ${listaUsuarios}">
-							<td th:text="${usu.id}"></td>
+							<td th:text="${usu.idusuario}"></td>
 							<td th:text="${usu.nombre}"></td>
-							<td th:text="${usu.telefono}"></td>
-							<td th:text="${usu.direccion}"></td>
-							<td th:text="${usu.tipousuario.desc_tipo}"></td>
+							<td th:text="${usu.apellidos}"></td>
+							<td th:text="${usu.tipousuario.desctipo}"></td>
 							<td th:text="${usu.email}"></td>
 							<td th:text="${usu.estado}"></td>
 							<td><a class="btn btn-info btn-sm"
-								th:href="@{/usuario/Mostrar/} + ${usu.id}"> <i
+								th:href="@{/usuario/Mostrar/} + ${usu.idusuario}"> <i
 									class="fas fa-pen sm" style="color: white;" title="Editar"></i>
 							</a> <a class="btn btn-danger btn-sm"
-								th:href="@{/usuario/Eliminar/} + ${usu.id}"> <i
+								th:href="@{/usuario/Eliminar/} + ${usu.idusuario}"> <i
 									class="fas fa-trash sm" style="color: white;" title="Eliminar"></i>
 							</a></td>
 						</tr>
 
 					</tbody>
 				</table>
-			</div>
+			</div>-->
 
 		</div>
 	</div>

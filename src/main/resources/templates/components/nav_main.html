@@ -7,28 +7,66 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Mantenimientos
+                            Users
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" th:href="@{/cliente/listado}">Mantenimiento de Clientes       <i class="fas fa-users-cog"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/usuario/listado}">Mantenimiento de Usuarios   <i class="fas fa-user-edit"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Mantenimiento de Películas    <i class="fas fa-film"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/comestible/listado}">Mantenimiento de Comestibles  <i class="fas fa-drumstick-bite"></i></a></li>
-                        	<li><a class="dropdown-item" th:href="@{/proveedor/listado}">Mantenimiento de Proveedores  <i class="fas fa-box"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/cliente/listado}">Clientes <i class="fas fa-users-cog"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios   <i class="fas fa-user-edit"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas    <i class="fas fa-film"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles  <i class="fas fa-drumstick-bite"></i></a></li>
+<!--                        	<li><a class="dropdown-item" th:href="@{/proveedor/listado}">Proveedores  <i class="fas fa-box"></i></a></li>-->
                         	
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                             <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Reporte
+                            Peliculas
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/detalleBoleta/reporte}">Reporte  de Ventas     <i class="fas fa-align-left"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/boleta/reporte}">Reporte de Boletas  <i class="fas fa-barcode"></i></a></li>
+                             <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas    <i class="fas fa-film"></i></a></li>
                         </ul>
                     </li>
+
+        </li>
+                             <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Comestibles
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                             <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles  <i class="fas fa-drumstick-bite"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Reservaciones
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <!--                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>-->
+                            <li><a class="dropdown-item" th:href="@{/reservacion/listado}">Lista de Reservas <i
+                                    class="fas fa-align-left"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/reservacion/cargar}">Reservar Entradas <i
+                                    class="fas fa-barcode"></i></a></li>
+                        </ul>
+                    </li>
+
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Reservaciones
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            &lt;!&ndash;                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>&ndash;&gt;
+                            <li><a class="dropdown-item" th:href="@{/detalleBoleta/reporte}">Reporte de Ventas <i
+                                    class="fas fa-align-left"></i></a></li>
+                            <li><a class="dropdown-item" th:href="@{/boleta/reporte}">Reporte de Boletas <i
+                                    class="fas fa-barcode"></i></a></li>
+                        </ul>
+                    </li>-->
+
                 </ul>
             </div>
             <ul class="nav justify-content-end">
@@ -38,7 +76,7 @@
                         </button>
                 </li>  -->
                 <li class="nav-item" style="margin-left: 5px">
-                  <a th:href="@{/login/logeo}" class="btn btn-dark"  aria-pressed="true" style="color: white;font-weight: bold;">  Logout</a>
+                  <a th:href="@{/login/logeo}" class="btn btn-danger"  aria-pressed="true" style="color: white;font-weight: bold;">Cerrar Sesion</a>
                 </li>
             </ul>
         </div>

@@ -31,7 +31,7 @@ label.error {
 
 		<div class="row">
 
-			<div class="col-3 mt-2">
+			<!--<div class="col-3 mt-2">
 
 				<h2>Comestible</h2>
 
@@ -117,36 +117,39 @@ label.error {
 				</form>
 				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary"
 					role="alert" th:text="${mensajeCorrecto}"></div>
-			</div>
+			</div>-->
 
 			<div class="col-9">
-				<h1>Mantenimiento de Comestibles <span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span></h1>
+				<h1 class="text-center">Comestibles Disponibles </h1>
+<!--					<span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span>-->
+				<div class="mt-2">
+					<a th:href="@{/comestible/cargar}" class="btn btn-primary fw-bold">Nuevo Producto</a>
+				</div>
+
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Descripción</th>
-							<th>Precio</th>
+							<th>Producto</th>
+							<th>Precio (S/.)</th>
 							<th>Stock</th>
 							<th>Tipo Comestible</th>
-							<th>Proveedor</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="comestible : ${listado}">
-							<td th:text="${comestible.idComestible}"></td>
-							<td th:text="${comestible.descripcion}"></td>
+							<td th:text="${comestible.idcomestible}"></td>
+							<td th:text="${comestible.descrip}"></td>
 							<td th:text="${comestible.precio}"></td>
-							<td th:text="${comestible.stock}"></td>
-							<td th:text="${comestible.idTipo}"></td>
-							<td th:text="${comestible.idProveedor}"></td>
+							<td th:text="${comestible.stockactual}"></td>
+							<td th:text="${comestible.idtipocomestible}"></td>
 							<td th:text="${comestible.estado}"></td>
 							<td><a class="btn btn-info btn-sm"
-								th:href="@{/comestible/editar/} + ${comestible.idComestible}"> <i
+								th:href="@{/comestible/editar/} + ${comestible.idcomestible}"> <i
 									class="fas fa-pen" style="color: white;" title="Editar"></i>
-							</a> <a class="btn btn-danger btn-sm" th:href="@{/comestible/eliminar/} + ${comestible.idComestible}"> <i class="fas fa-trash"
+							</a> <a class="btn btn-danger btn-sm" th:href="@{/comestible/eliminar/} + ${comestible.idcomestible}"> <i class="fas fa-trash"
 									title="Eliminar"></i>
 							</a></td>
 						</tr>

@@ -25,6 +25,13 @@ public class PeliculaController {
 	@Autowired
 	ITipoPelicula repot;
 
+	@GetMapping("/cargar")
+	public String abrirPagina(Model model) {
+		model.addAttribute("pelicula", new Pelicula());
+		model.addAttribute("listadoTipoPelicula", repot.findAll());
+		model.addAttribute("listadoPelicula", rep.findAll());
+		return "MPelicula";
+	}
 
 	@GetMapping("/listado")
 	public String listadoPeliculas(@ModelAttribute(name = "pelicula") Pelicula pelicula, Model model) {
@@ -32,7 +39,7 @@ public class PeliculaController {
 		model.addAttribute("pelicula", new Pelicula());
 		model.addAttribute("cantidad", rep.findAll().size());
 		model.addAttribute("listadoPelicula", rep.findAll());
-		return "MPelicula";
+		return "ListPelicula";
 	}
 
 	@PostMapping("/guardar")
@@ -41,7 +48,7 @@ public class PeliculaController {
 			if (peliculas != null) {
 				System.out.println(peliculas);
 				
-				if (peliculas.getTipo_peli() == -1) {
+				if (peliculas.getTipopeli() == -1) {
 					model.addAttribute("validacion", "Seleccione un tipo de pelicula.");
 					model.addAttribute("listadoTipoPelicula", repot.findAll());
 					model.addAttribute("listadoPelicula", rep.findAll());
@@ -59,8 +66,6 @@ public class PeliculaController {
 
 	}
 
-	
-	  
 	  @GetMapping("/editar/{id}")
 		public String editarPelicula(@PathVariable String id,Model model ) {
 		  

@@ -31,107 +31,37 @@ label.error {
 	<div class="container mt-4">
 
 		<div class="row">
-
-<!-- Formulario -->
-		<!--	<div class="col-3 mt-2">
-
-				<h2>Cliente</h2>
-
-
-				<form th:action="@{/cliente/Guardar}" id="formulario"
-					th:object="${cliente}" method="post">
-
-					<input type="hidden" th:field="*{idCliente}" id="id">
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Nombre :</label> <input
-							type="text" class="form-control" id="nombre"
-							placeholder="Nombre..." th:field="*{nombre}">
-
-					</div>
-
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Teléfono :</label> <input
-							type="text" class="form-control" id="telefono"
-							placeholder="Teléfono..." th:field="*{telefono}">
-
-					</div>
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Dirección :</label> <input
-							type="text" class="form-control" id="direccion"
-							placeholder="Dirección..." th:field="*{direccion}">
-
-					</div>
-
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Correo :</label> <input
-							type="text" class="form-control" id="email"
-							placeholder="Correo..." th:field="*{email}">
-
-					</div>
-
-					<div class="form-group mt-2" hidden>
-
-						<label for="floatingInputValue">Estado :</label> <select
-							class="form-select" aria-label="Default select example"
-							th:field="*{estado}">
-							<option value="A">Activo</option>
-						</select>
-
-					</div>
-
-					<div class="mt-2">
-						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
-						<a th:href="@{/cliente/listado}" class="btn btn-secondary fw-bold">Refresar</a>
-					</div>
-				</form>
-				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary"
-					role="alert" th:text="${mensajeCorrecto}"></div>
-			</div>-->
-
 		<!-- Listado-->
-
 
 			<div class="col-9">
 				<h1 class="text-center">
-					Listado de Clientes
+					Butacas Disponibles
 				</h1>
 
 					<div class="mt-2">
-					<a th:href="@{/cliente/cargar}" class="btn btn-primary fw-bold">Nuevo Cliente</a>
+					<a th:href="@{/butaca/cargar}" class="btn btn-primary fw-bold">Agregar Butaca</a>
 				</div>
 
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Teléfono</th>
-							<th>Email</th>
+							<th>Fila</th>
+							<th>Numero de Butaca</th>
+							<th>Sala</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="cliente : ${listado}">
-							<td th:text="${cliente.idcliente}"></td>
-							<td th:text="${cliente.nombre}"></td>
-							<td th:text="${cliente.apellidos}"></td>
-							<td th:text="${cliente.telefono}"></td>
-							<td th:text="${cliente.email}"></td>
+						<tr th:each="butaca : ${listadoButaca}">
+							<td th:text="${butaca.idbutaca}"></td>
+							<td th:text="${butaca.fila}"></td>
+							<td th:text="${butaca.numero}"></td>
+							<td th:text="${butaca.sala.idsala}"></td>
 							<td><a class="btn btn-info btn-sm"
-								th:href="@{/cliente/editar/} + ${cliente.idcliente}"> <i
+								th:href="@{/butaca/editar/} + ${butaca.idbutaca}"> <i
 									class="fas fa-pen" style="color: white;" title="Editar"></i>
-							</a> <a class="btn btn-danger btn-sm" th:href="@{/cliente/eliminar/} + ${cliente.idcliente}"> <i class="fas fa-trash"
+							</a> <a class="btn btn-danger btn-sm" th:href="@{/butaca/eliminar/} + ${butaca.idbutaca}"> <i class="fas fa-trash"
 									title="Eliminar"></i>
 							</a></td>
 						</tr>

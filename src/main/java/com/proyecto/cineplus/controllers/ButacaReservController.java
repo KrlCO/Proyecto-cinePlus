@@ -1,2 +1,4 @@
-package com.proyecto.cineplus.controllers;public class ButacaReservController {
+package com.proyecto.cineplus.controllers;
+
+public class ButacaReservController {
 }
