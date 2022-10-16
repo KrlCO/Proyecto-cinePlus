@@ -39,7 +39,7 @@ public class ComestibleController {
 	@GetMapping("/listado")
 	public String listadoComestible(@ModelAttribute(name = "comestible") Comestible comestible,Model model) {
 		model.addAttribute("listado", repoComestible.findAll());
-		model.addAttribute("comestible", new Comestible());
+		//model.addAttribute("comestible", new Comestible());
 		model.addAttribute("cantidad", repoComestible.findAll().size());
 		model.addAttribute("cboComestible", repoTipoComestible.findAll());
 		//model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());

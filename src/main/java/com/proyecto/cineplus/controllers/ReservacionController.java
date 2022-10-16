@@ -40,7 +40,7 @@ public class ReservacionController {
 
     @GetMapping("/listado")
     public String listadoReservacion(@ModelAttribute(name = "reservacion")Reservacion reserva, Model model){
-        model.addAttribute("reservacion", new Reservacion());
+        //model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
         model.addAttribute("listadoReservacion", reporeserv.findAll());
@@ -53,23 +53,6 @@ public class ReservacionController {
 
         if(reservacion != null){
 
-           /* if(reserva.getIdpeli() == -1){
-            model.addAttribute("validacion", "Selecciona una Reservacion");
-            model.addAttribute("listadoPeliculas", repopeli.findAll());
-            model.addAttribute("listadoCliente", repocliente.findAll());
-            model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
-            model.addAttribute("listadoReservacion", reporeserv.findAll());
-            return "MReservacion";
-            }
-
-            if(reserva.getIdcliente() == -1){
-            model.addAttribute("validacion", "Selecciona una Reservacion");
-            model.addAttribute("listadoPeliculas", repopeli.findAll());
-            model.addAttribute("listadoCliente", repocliente.findAll());
-            model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
-            model.addAttribute("listadoReservacion", reporeserv.findAll());
-            return "MReservacion";
-            }*/
 
             if (reservacion.getIdreserva() == -1) {
                 model.addAttribute("validacion", "Selecciona una Reservacion");
@@ -81,10 +64,12 @@ public class ReservacionController {
             }
 
             reporeserv.save(reservacion);
+            model.addAttribute("listadoPeliculas", repopeli.findAll());
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
             model.addAttribute("listadoReservacion", reporeserv.findAll());
-            model.addAttribute("listadoPeliculas", repopeli.findAll());
+            model.addAttribute("reservacion", new Reservacion());
+
             return "ListReservacion";
         }
         return "redirect:/reservacion/listado";
