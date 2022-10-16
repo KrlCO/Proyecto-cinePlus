@@ -17,16 +17,16 @@ import java.util.Optional;
 public class ReservacionController {
 
     @Autowired
-    IReservavionRepository reporeserv;
+    private IReservavionRepository reporeserv;
 
     @Autowired
-    IClienteRepository repocliente;
+    private IClienteRepository repocliente;
 
     @Autowired
-    ITiporeservacionRespository repotiporeserv;
+    private ITiporeservacionRespository repotiporeserv;
 
     @Autowired
-    IPeliculaRepository repopeli;
+    private IPeliculaRepository repopeli;
 
     @GetMapping("/cargar")
     public String abrirPagina(Model model){
@@ -49,9 +49,9 @@ public class ReservacionController {
     }
 
     @PostMapping("/guardar")
-    public String guardarReservacion(@ModelAttribute(name = "reservacion")Reservacion reserva, Model model){
+    public String guardarReservacion(@ModelAttribute(name = "reservacion")Reservacion reservacion, Model model){
 
-        if(reserva != null){
+        if(reservacion != null){
 
            /* if(reserva.getIdpeli() == -1){
             model.addAttribute("validacion", "Selecciona una Reservacion");
@@ -71,23 +71,23 @@ public class ReservacionController {
             return "MReservacion";
             }*/
 
-              if(reserva.getIdreserva() == -1){
-            model.addAttribute("validacion", "Selecciona una Reservacion");
-            model.addAttribute("listadoCliente", repocliente.findAll());
-            model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
-            model.addAttribute("listadoReservacion", reporeserv.findAll());
-            model.addAttribute("listadoPeliculas", repopeli.findAll());
-            return "MReservacion";
+            if (reservacion.getIdreserva() == -1) {
+                model.addAttribute("validacion", "Selecciona una Reservacion");
+                model.addAttribute("listadoCliente", repocliente.findAll());
+                model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
+                model.addAttribute("listadoReservacion", reporeserv.findAll());
+                model.addAttribute("listadoPeliculas", repopeli.findAll());
+                return "ListReservacion";
             }
 
-            reporeserv.save(reserva);
+            reporeserv.save(reservacion);
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
             model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("listadoPeliculas", repopeli.findAll());
-            return "redirect:/reservacion/listado";
+            return "ListReservacion";
         }
-        return "MReservacion";
+        return "redirect:/reservacion/listado";
     }
 
     public String editarReservacion(@PathVariable String id, Model model){

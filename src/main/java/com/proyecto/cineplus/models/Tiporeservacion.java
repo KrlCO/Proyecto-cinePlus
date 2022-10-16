@@ -13,6 +13,7 @@ public class Tiporeservacion {
 
     @Id
     private int idreserva;
+
     private String tiporeservacion;
 
 }

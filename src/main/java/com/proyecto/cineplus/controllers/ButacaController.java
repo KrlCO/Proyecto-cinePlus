@@ -73,6 +73,7 @@ public class ButacaController {
         return "redirect:/butaca/listado";
     }
 
+    @GetMapping("/eliminar/{id}")
     public String eliminarButaca(@PathVariable String id, Model model){
         Butaca butaca = repobutaca.findById(id).get();
 
