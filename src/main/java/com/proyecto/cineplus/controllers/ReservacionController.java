@@ -39,7 +39,7 @@ public class ReservacionController {
     }
 
     @GetMapping("/listado")
-    public String listadoReservacion(@ModelAttribute(name = "reservacion")Reservacion reserva, Model model){
+    public String listadoReservacion(Model model){
         //model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
