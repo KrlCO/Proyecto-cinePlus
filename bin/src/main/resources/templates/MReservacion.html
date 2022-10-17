@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mantenimiento de Peliculas</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+	integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+label.error {
+	color: red;
+}
+
+
+</style>
+
+</head>
+<body>
+
+	<nav th:replace="components/nav_main :: nav_main"></nav>
+
+
+
+	<div class="container mt-4">
+
+		<div class="row">
+
+			<div class="col-3 mt-2">
+
+				<h2>Reservación</h2>
+				<form th:action="@{/reservacion/guardar}" id="formulario" th:object="${reservacion}" method="post">
+
+					<div class="form-group mt-2" hidden>
+						<label for="floatingInputValue">ID :</label> <input
+							type="text" class="form-control" id="idreservacion"
+							placeholder="P0000" th:field="*{idreservacion}" autocomplete="off">
+					</div>
+
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">Peliculas :</label>
+						<select id="pelicula" class="form-select" aria-label="Default select example"
+								th:field="*{pelicula}">
+							<option selected value="-1">[Seleccionar]</option>
+							<option th:each="p: ${listadoPeliculas}"
+									th:value="${p.idpeli}"
+									th:text="${p.titulo}">
+							</option>
+						</select>
+						<span class="text-danger" th:text="${validacion}"></span>
+					</div>
+
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">ID Cliente :</label> <input
+							type="text" class="form-control" id="cliente"
+							placeholder="Codigo de Cliente" th:field="*{idcliente}" autocomplete="off">
+					</div>
+
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">Tipo de Reserva :</label>
+						<select id="inputType" class="form-select" aria-label="Default select example"
+								th:field="*{tiporeservacion}">
+							<option selected value="-1">[Seleccionar]</option>
+							<option th:each="p: ${listadoTipoReserv}"
+									th:value="${p.idreserva}"
+									th:text="${p.tiporeservacion}">
+							</option>
+						</select>
+						<span class="text-danger" th:text="${validacion}"></span>
+					</div>
+
+					<div class="form-group mt-2">
+						<label for="floatingInputValue">Numero de Contacto para Reservación :</label>
+						<input required="required" type="text" class="form-control" id="numerocontacto"
+							   placeholder="Número telefonico" th:field="*{contactoreserva}" autocomplete="off">
+					</div>
+
+					<div class="form-group mt-2" >
+						<label for="floatingInputValue">Reserva :</label>
+						<select class="form-select" aria-label="Default select example" th:field="*{reserva}">
+							<option value=1>Reservado</option>
+						</select>
+					</div>
+
+
+					<div class="form-group mt-2" >
+						<label for="floatingInputValue">Pago :</label>
+						 <select class="form-select" aria-label="Default select example" th:field="*{pago}">
+							<option value=1>Confirmado</option>
+						</select>
+					</div>
+
+
+					<div class="form-group mt-2" >
+						<label for="floatingInputValue">Estado :</label>
+						<select class="form-select" aria-label="Default select example" th:field="*{estado}">
+							<option value="A">Activo</option>
+						</select>
+					</div>
+
+					<br/>
+					<div class="mt-2">
+						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
+						<a class="btn btn-secondary fw-bold" th:href="@{/reservacion/listado}">Refrescar</a>
+					</div>
+				</form>
+				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary" role="alert" th:text="${mensajeCorrecto}"></div>
+			</div>
+			
+		</div>
+
+
+	</div>
+
+
+<footer th:replace="components/footer :: footer"></footer>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+		integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+		
+		<script type="text/javascript">
+		
+		$.validator.addMethod('expresion',function(value,element){
+			return this.optional(element) || /^[P]+[0-9]{4}$/.test(value);
+		});
+		
+		$(document).ready(function () {
+		    var intputElements = document.getElementsByTagName("INPUT");
+		    for (var i = 0; i < intputElements.length; i++) {
+		        intputElements[i].oninvalid = function (e) {
+		            e.target.setCustomValidity("");
+		            if (!e.target.validity.valid) {
+		                if (e.target.fechaEstreno.oninvalid) {
+		                    e.target.setCustomValidity("El Campo es requerido.");
+		                }
+		                else if(e.target.fechaFinal.oninvalid) {
+		                    e.target.setCustomValidity("El Campo es requerido.");
+		                }
+		            }
+		        };
+		    }
+		})
+		
+		
+		
+		$(function(){
+			
+			$("#btn").on("click",function(){
+				$("#formulario").validate({
+					rules:{
+						idpeli:{required:true,minlength:5,maxlength:5,expresion:true},
+						nombre: {required:true,maxlength:100},
+						fechaEstreno:{required:true},
+						fechaFinal :{required:true}
+					},
+					messages:{
+						idpeli:{
+							required:"El Campo es requerido.",
+							minlength:"El Minimo son 5 caracteres",
+							maxlength:"El maximo son 5 caracteres.",
+							expresion:"El Formato es con el prefijo 'P' + 4 dígitos (P0000)."
+							},
+						nombre:{
+							required:"El Campo es requerido.",
+							maxlength: "El maximo son 100 caracteres."
+						},
+						fecha_estreno:{
+							required: "El Campo es requerido."
+							},
+						fecha_final :{
+							required:"El Campo es requerido."
+							}	
+					}
+				});
+			});
+			
+		});
+		
+		</script>
+</body>
+</html>
