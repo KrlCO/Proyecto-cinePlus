@@ -44,6 +44,7 @@ public class ClienteController {
 	@GetMapping("/cargar")
 	public String abrirPagina(Model model) {
 		model.addAttribute("cliente", new Cliente());
+		model.addAttribute("listado",repo.findAll());
 		return "MCliente";
 	}
 
