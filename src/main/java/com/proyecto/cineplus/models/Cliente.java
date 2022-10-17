@@ -2,7 +2,8 @@ package com.proyecto.cineplus.models;
 
 import lombok.Data;
 
-import javax.persistence.Column;
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -18,5 +19,5 @@ public class Cliente {
 	private String telefono;
 	private String email;
 	private String password;
-
+	private Date fecharegistro;
 }
