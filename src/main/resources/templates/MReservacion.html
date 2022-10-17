@@ -47,7 +47,7 @@ label.error {
 					<div class="form-group mt-2">
 						<label for="floatingInputValue">Peliculas :</label>
 						<select id="pelicula" class="form-select" aria-label="Default select example"
-								th:field="*{pelicula}">
+								th:field="*{idpeli}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="p: ${listadoPeliculas}"
 									th:value="${p.idpeli}"
@@ -66,11 +66,11 @@ label.error {
 					<div class="form-group mt-2">
 						<label for="floatingInputValue">Tipo de Reserva :</label>
 						<select id="inputType" class="form-select" aria-label="Default select example"
-								th:field="*{tiporeservacion}">
+								th:field="*{idreserva}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="p: ${listadoTipoReserv}"
 									th:value="${p.idreserva}"
-									th:text="${p.tiporeservacion}">
+									th:text="${p.descripcion}">
 							</option>
 						</select>
 						<span class="text-danger" th:text="${validacion}"></span>
@@ -173,18 +173,18 @@ label.error {
 			$("#btn").on("click",function(){
 				$("#formulario").validate({
 					rules:{
-						idpeli:{required:true,minlength:5,maxlength:5,expresion:true},
-						nombre: {required:true,maxlength:100},
+<!--						idpeli:{required:true,minlength:50,maxlength:100,expresion:true},-->
+						nombre: {required:true,maxlength:500},
 						fechaEstreno:{required:true},
 						fechaFinal :{required:true}
 					},
 					messages:{
-						idpeli:{
+						<!--idpeli:{
 							required:"El Campo es requerido.",
 							minlength:"El Minimo son 5 caracteres",
 							maxlength:"El maximo son 5 caracteres.",
 							expresion:"El Formato es con el prefijo 'P' + 4 dígitos (P0000)."
-							},
+							},-->
 						nombre:{
 							required:"El Campo es requerido.",
 							maxlength: "El maximo son 100 caracteres."
