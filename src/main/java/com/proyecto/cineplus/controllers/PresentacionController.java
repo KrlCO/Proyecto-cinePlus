@@ -29,12 +29,7 @@ public class PresentacionController {
 	
 	@GetMapping("/home")
 	public String home(Model model) {
-		
-		model.addAttribute("cantidadCliente", repoCliente.findAll().size());
-		model.addAttribute("cantidadComestible", repoComestible.findAll().size());
 		model.addAttribute("cantidadPelicula", repoPelicula.findAll().size());
-		model.addAttribute("cantidadProveedor", repoProveedor.findAll().size());
-		model.addAttribute("cantidadUsuario", repoUsuario.findAll().size());
 		return "presentacion";
 	}
 }
