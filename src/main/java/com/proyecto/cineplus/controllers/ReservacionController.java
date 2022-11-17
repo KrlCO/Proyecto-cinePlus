@@ -29,7 +29,7 @@ public class ReservacionController {
     private IPeliculaRepository repopeli;
 
     @GetMapping("/cargar")
-    public String abrirPagina(Model model){
+    public String abrirPagina(@ModelAttribute(name = "reservacion")Reservacion reservacion, Model model){
         model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoPeliculas", repopeli.findAll());
         model.addAttribute("listadoCliente", repocliente.findAll());
@@ -40,6 +40,7 @@ public class ReservacionController {
 
     @GetMapping("/listado")
     public String listadoReservacion(Model model){
+
         //model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
@@ -53,33 +54,32 @@ public class ReservacionController {
 
         if(reservacion != null){
 
-
             if (reservacion.getIdreserva() == -1) {
-               // model.addAttribute("validacion", "Selecciona una Reservacion");
+
                 model.addAttribute("listadoCliente", repocliente.findAll());
-                model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
                 model.addAttribute("listadoReservacion", reporeserv.findAll());
                 model.addAttribute("listadoPeliculas", repopeli.findAll());
+                model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
                 return "ListReservacion";
             }
 
             reporeserv.save(reservacion);
+            model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("listadoPeliculas", repopeli.findAll());
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
-            model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("reservacion", new Reservacion());
-
             return "ListReservacion";
         }
         return "redirect:/reservacion/listado";
     }
 
-    public String editarReservacion(@PathVariable String id, Model model){
+    @GetMapping("/editar/{id}")
+    public String editarReservacion(@PathVariable String id, Model model) {
 
         Optional<Reservacion> reservacion = reporeserv.findById(id);
 
-        if(reservacion.isPresent()){
+        if (reservacion.isPresent()) {
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
             model.addAttribute("listadoReservacion", reporeserv.findAll());
