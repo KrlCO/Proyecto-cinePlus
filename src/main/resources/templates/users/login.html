@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="components/fragments :: headerfiles">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>CinePlus</title>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/presentacion/home}" style="font-weight: bold;">CINEPLUS</a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/usuario/login}">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Page Content -->
+<div class="container">
+<br/>
+  <br/>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2>Ingresar</h2>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <form  th:action="@{/usuario/acceder}" method="post">
+    <div class="form-group col-md-6">
+      <label for="email"> Email:  </label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off">
+
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="password"> Contraseña:</label>
+      <input type="password"  class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-success"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
+      </div>
+    </div>
+  </form>
+  <a th:href="@{/usuario/registro}" class="card-link">Si aún no tienes una cuenta registrartrate aquí</a>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer th:replace="components/footer :: footer"></footer>
+
+<!--<div th:include="administrador/template_admin.html::footer"></div>-->
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+        integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
