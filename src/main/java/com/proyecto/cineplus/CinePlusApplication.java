@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CinePlusApplication {
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(CinePlusApplication.class, args);
 		System.out.println("LET'S GO!");
 

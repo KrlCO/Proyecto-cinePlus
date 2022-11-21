@@ -1,121 +1,146 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<nav  th:fragment="nav_main" class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/presentacion/home}" style="font-weight: bold;">CINEPLUS</a>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Users
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" th:href="@{/cliente/listado}">Clientes <i class="fas fa-users-cog"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios   <i class="fas fa-user-edit"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas    <i class="fas fa-film"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles  <i class="fas fa-drumstick-bite"></i></a></li>
-<!--                        	<li><a class="dropdown-item" th:href="@{/proveedor/listado}">Proveedores  <i class="fas fa-box"></i></a></li>-->
-                        	
-                        </ul>
-                    </li>
-                             <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Peliculas
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                             <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas    <i class="fas fa-film"></i></a></li>
-                        </ul>
-                    </li>
 
-        </li>
-                             <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Comestibles
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                             <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles  <i class="fas fa-drumstick-bite"></i></a></li>
-                        </ul>
-                    </li>
+<nav th:fragment="nav_main" class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Reservaciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <!--                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>-->
-                            <li><a class="dropdown-item" th:href="@{/reservacion/listado}">Lista de Reservas <i
-                                    class="fas fa-align-left"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/reservacion/cargar}">Reservar Entradas <i
-                                    class="fas fa-barcode"></i></a></li>
-                        </ul>
-                    </li>
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/presentacion/home}" style="font-weight: bold;">CINEPLUS</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        User
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/usuario}">Películas <i
+                                class="fas fa-film"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles <i
+                                class="fas fa-candy-cane"></i></a></li>
 
-                    <!-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Reservaciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            &lt;!&ndash;                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>&ndash;&gt;
-                            <li><a class="dropdown-item" th:href="@{/detalleBoleta/reporte}">Reporte de Ventas <i
-                                    class="fas fa-align-left"></i></a></li>
-                            <li><a class="dropdown-item" th:href="@{/boleta/reporte}">Reporte de Boletas <i
-                                    class="fas fa-barcode"></i></a></li>
-                        </ul>
-                    </li>-->
-
-                </ul>
-            </div>
-            <ul class="nav justify-content-end">
-      <!--           <li class="nav-item">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fas fa-user" style="font-weight: bold;"></i>
-                        </button>
-                </li>  -->
-                <li class="nav-item" style="margin-left: 5px">
-                  <a th:href="@{/login/logeo}" class="btn btn-danger"  aria-pressed="true" style="color: white;font-weight: bold;">Cerrar Sesion</a>
+                    </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/cliente/listado}">Clientes <i
+                                class="fas fa-users-cog"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/usuario/listado}">Usuarios <i
+                                class="fas fa-user-edit"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas <i
+                                class="fas fa-film"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles <i
+                                class="fas fa-candy-cane"></i></a></li>
+                        <!--                        	<li><a class="dropdown-item" th:href="@{/proveedor/listado}">Proveedores  <i class="fas fa-box"></i></a></li>-->
+
+
+                    </ul>
+                </li>
+
+              <!--  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Peliculas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/pelicula/listado}">Películas <i
+                                class="fas fa-film"></i></a></li>
+                    </ul>
+                </li>
+
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Comestibles
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" th:href="@{/comestible/listado}">Comestibles <i
+                                class="fas fa-drumstick-bite"></i></a></li>
+                    </ul>
+                </li>
+-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Reservaciones
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                        <li><a class="dropdown-item" th:href="@{/reservacion/listado}">Lista de Reservas <i
+                                class="fas fa-align-left"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/reservacion/cargar}">Reservar Entradas <i
+                                class="fas fa-barcode"></i></a></li>
+                    </ul>
+                </li>
+
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Reservaciones
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        &lt;!&ndash;                            <li><a class="dropdown-item" th:href="@{/cliente/reporte}">Reporte de Clientes <i class="fas fa-align-left"></i></a></li>&ndash;&gt;
+                        <li><a class="dropdown-item" th:href="@{/detalleBoleta/reporte}">Reporte de Ventas <i
+                                class="fas fa-align-left"></i></a></li>
+                        <li><a class="dropdown-item" th:href="@{/boleta/reporte}">Reporte de Boletas <i
+                                class="fas fa-barcode"></i></a></li>
+                    </ul>
+                </li>-->
+
             </ul>
         </div>
-    </nav>
+        <ul class="nav justify-content-end">
+            <!--           <li class="nav-item">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                  <i class="fas fa-user" style="font-weight: bold;"></i>
+                              </button>
+                      </li>  -->
+            <li class="nav-item" style="margin-left: 5px">
+                <a th:href="@{/login/logeo}" class="btn btn-danger" aria-pressed="true"
+                   style="color: white;font-weight: bold;">Cerrar Sesion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Perfil de Usuario <i class="fas fa-user"
+                                                                                    style="font-weight: bold;color:black"></i>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
 
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
-     <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Perfil de Usuario <i class="fas fa-user" style="font-weight: bold;color:black"></i></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                <h3>Nombre:     <span class="badge bg-info text-light">@SessionHelper.GetName(User)</span></h3>
-                                <h3>Email :     <span class="badge bg-info text-light">@SessionHelper.GetNameIdentifier(User)</span></h3>
-                                <h3>Dirección :  <span class="badge bg-info text-light">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.StreetAddress).Value)</span></h3>
-                                <h3>Teléfono  :  <span class="badge bg-info text-light">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.MobilePhone).Value)</span></h3>
-                            }
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                    </div>
+                    <h3>Nombre: <span class="badge bg-info text-light">@SessionHelper.GetName(User)</span></h3>
+                    <h3>Email : <span class="badge bg-info text-light">@SessionHelper.GetNameIdentifier(User)</span>
+                    </h3>
+                    <h3>Dirección : <span class="badge bg-info text-light">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.StreetAddress).Value)</span>
+                    </h3>
+                    <h3>Teléfono : <span class="badge bg-info text-light">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.MobilePhone).Value)</span>
+                    </h3>
+                    }
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-
-
-
-
-
+    </div>
+</div>

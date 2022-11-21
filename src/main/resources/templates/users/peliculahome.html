@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="components/fragments :: headerfiles">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>CinePlus</title>
+
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav th:replace="users/template_user :: nav_main"></nav>
+<!--<nav th:replace="components/nav_main :: nav_main"></nav>-->
+
+<!-- Page Content -->
+<div class="container">
+
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">
+    CinePlus <small>Pelicula</small>
+  </h1>
+
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+    <li class="breadcrumb-item active">Pelicula</li>
+  </ol>
+
+  <!-- Blog Post -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <a href="#"> <img class="img-fluid rounded"
+                            th:src="@{/images/{img} (img=${pelicula.image})}" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <form th:action="carrito.html" method="POST">
+            <input type="hidden" th:value="${pelicula.idpeli}" name="idpeli">
+            <h2 class="card-title" th:text="${pelicula.titulo}"></h2>
+
+            <ul class="list-group">
+              <li class="list-group-item"><h5></h5></li>
+              <li class="list-group-item">
+                <p ></p>
+              </li>
+              <li class="list-group-item"><h6>
+                Cantidad: <input type="number" id="cantidad" name="cantidad"
+                                 autocomplete="off" min="1" max="5" value="1">
+              </h6></li>
+            </ul>
+
+
+            <button type="submit" class="btn btn-dark">Añadir al
+              carrito</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer th:replace="components/footer :: footer"></footer>
+
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+        integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

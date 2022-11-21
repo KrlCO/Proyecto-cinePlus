@@ -39,7 +39,8 @@ public class ReservacionController {
     }
 
     @GetMapping("/listado")
-    public String listadoReservacion( Model model){
+    public String listadoReservacion(Model model){
+
         //model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
@@ -54,7 +55,7 @@ public class ReservacionController {
         if(reservacion != null){
 
             if (reservacion.getIdreserva() == -1) {
-                //model.addAttribute("validacion", "Selecciona una Reservacion");
+
                 model.addAttribute("listadoCliente", repocliente.findAll());
                 model.addAttribute("listadoReservacion", reporeserv.findAll());
                 model.addAttribute("listadoPeliculas", repopeli.findAll());

@@ -1,93 +1,131 @@
 package com.proyecto.cineplus.controllers;
 
+import java.io.IOException;
 import java.util.Optional;
 
+import com.proyecto.cineplus.models.TipoPelicula;
+import com.proyecto.cineplus.models.User;
+import com.proyecto.cineplus.service.IUsuarioService;
+import com.proyecto.cineplus.service.PeliculaService;
+import com.proyecto.cineplus.service.TipoPeliService;
+import com.proyecto.cineplus.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.cineplus.models.Pelicula;
 import com.proyecto.cineplus.repository.IPeliculaRepository;
 import com.proyecto.cineplus.repository.ITipoPelicula;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/pelicula")
 public class PeliculaController {
 
-		@Autowired
-		IPeliculaRepository rep;
+	@Autowired
+	IPeliculaRepository rep;
 
 	@Autowired
 	ITipoPelicula repot;
 
+	@Autowired
+	private PeliculaService peliculaService;
+
+	@Autowired
+	private TipoPeliService tipoPeliService;
+	 @Autowired
+	private IUsuarioService usuarioService;
+
+	 @Autowired
+	 private UploadFileService upload;
+
 	@GetMapping("/cargar")
 	public String abrirPagina(Model model) {
 		model.addAttribute("pelicula", new Pelicula());
-		model.addAttribute("listadoTipoPelicula", repot.findAll());
-		model.addAttribute("listadoPelicula", rep.findAll());
+		model.addAttribute("listadoTipoPelicula", tipoPeliService.findAll());
+		model.addAttribute("listadoPelicula", peliculaService.findAll());
 		return "MPelicula";
 	}
 
 	@GetMapping("/listado")
 	public String listadoPeliculas(@ModelAttribute(name = "pelicula") Pelicula pelicula, Model model) {
-		model.addAttribute("listadoTipoPelicula", repot.findAll());
+		model.addAttribute("listadoTipoPelicula", tipoPeliService.findAll());
 		model.addAttribute("pelicula", new Pelicula());
-		model.addAttribute("cantidad", rep.findAll().size());
-		model.addAttribute("listadoPelicula", rep.findAll());
+		model.addAttribute("cantidad", peliculaService.findAll().size());
+		model.addAttribute("listadoPelicula", peliculaService.findAll());
 		return "ListPelicula";
 	}
 
 	@PostMapping("/guardar")
-	public String guardarPelicula(@ModelAttribute(name = "pelicula") Pelicula peliculas, Model model) {
+	public String save(Pelicula pelicula, @RequestParam("img") MultipartFile file)throws IOException{
 
-			if (peliculas != null) {
-				System.out.println(peliculas);
-				
-				if (peliculas.getTipopeli() == -1) {
-					model.addAttribute("validacion", "Seleccione un tipo de pelicula.");
-					model.addAttribute("listadoTipoPelicula", repot.findAll());
-					model.addAttribute("listadoPelicula", rep.findAll());
-					model.addAttribute("cantidad", rep.findAll().size());
-					return "MPelicula";
-				}
-				
-			rep.save(peliculas);
-			model.addAttribute("listadoTipoPelicula", repot.findAll());
-			model.addAttribute("listadoPelicula", rep.findAll());
-			model.addAttribute("cantidad", rep.findAll().size());
-			return "redirect:/pelicula/listado";
-			}
-			return "MPelicula";
+		User u = new User(1, "", "krl", "", "", "", "");
+		pelicula.setUser(u);
+
+		String nombreImagen = upload.saveImage(file);
+		pelicula.setImage(nombreImagen);
+
+		peliculaService.save(pelicula);
+
+		return "redirect:/pelicula/listado";
 
 	}
 
-	  @GetMapping("/editar/{id}")
-		public String editarPelicula(@PathVariable String id,Model model ) {
-		  
-			Optional<Pelicula> peliculas = rep.findById(id);
-			
-			if (peliculas.isPresent()) {
-				model.addAttribute("listadoTipoPelicula", repot.findAll());
-				model.addAttribute("listadoPelicula", rep.findAll());
-				model.addAttribute("cantidad", rep.findAll().size());
-				model.addAttribute("pelicula",peliculas); 
-				return "MPelicula";
-				
+	@GetMapping("/editar/{id}")
+	public String edit(@PathVariable String id,Model model, Pelicula pelis){
+
+		Optional<Pelicula> peliculas = rep.findById(id);
+
+			/*if(!p.getImage().equals("default.jpg")){
+
+				upload.deleteImage(p.getImage());
 			}
-			return "redirect:/pelicula/listado";
-			
+			String nombreImagen = upload.saveImage(file);
+			pelis.setImage(nombreImagen);*/
+
+		if (peliculas.isPresent()) {
+			model.addAttribute("listadoTipoPelicula", tipoPeliService.findAll());
+			model.addAttribute("listadoPelicula", peliculaService.findAll());
+			model.addAttribute("cantidad", peliculaService.findAll().size());
+			model.addAttribute("pelicula",peliculas);
+			return "MPelicula";
+
 		}
+		return "redirect:/pelicula/listado";
+
+	}
+
+	@PostMapping("/update")
+	public String update(Pelicula pelicula, TipoPelicula tipopeli, @RequestParam ("img") MultipartFile file)throws IOException{
+
+		Pelicula p = new Pelicula();
+		TipoPelicula t = new TipoPelicula();
+		p = peliculaService.get(pelicula.getIdpeli()).get();
+		t = tipoPeliService.get(tipopeli.getIdtipo()).get();
+
+		if(file.isEmpty()){
+			pelicula.setImage(p.getImage());
+		}else{
+			if(!p.getImage().equals("default.jpg")){
+				upload.deleteImage(p.getImage());
+			}
+			String nombreImagen = upload.saveImage(file);
+			pelicula.setImage(nombreImagen);
+		}
+
+		pelicula.setUser(p.getUser());
+		peliculaService.update(pelicula);
+		tipoPeliService.update(tipopeli);
+
+		return "redirect:/pelicula/listado";
+	}
 	  
 		
-		  @GetMapping("/eliminar/{id}")
+/*		  @GetMapping("/eliminar/{id}")
 		  public String eliminarPelicula(@PathVariable String id, Model model) {
 		  
-		 /* Optional<Pelicula> pelicula = rep.findById(id); */
+		 *//* Optional<Pelicula> pelicula = rep.findById(id); *//*
 		 Pelicula pelicula = rep.findById(id).get(); 
 		  
 		  if(pelicula != null) {
@@ -103,5 +141,22 @@ public class PeliculaController {
 		  }
 		  return "redirect:/pelicula/listado";
 		 
-		}	
+		}*/
+
+		@GetMapping("/eliminar/{id}")
+		public String delete(@PathVariable String id){
+
+			Pelicula p = new Pelicula();
+			p = peliculaService.get(id).get();
+
+			if(!p.getImage().equals("default.jpg")){
+
+				upload.deleteImage(p.getImage());
+			}
+
+		peliculaService.delete(id);
+
+		return "redirect:/pelicula/listado";
+
+		}
 	  }

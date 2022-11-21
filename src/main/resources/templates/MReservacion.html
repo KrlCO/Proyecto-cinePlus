@@ -71,12 +71,16 @@ label.error {
 
 					<div class="form-group mt-2">
 						<label for="floatingInputValue">Tipo de Reserva :</label>
+
+		
+
 						<select id="tiporeservacion" class="form-select" aria-label="Default select example"
 								th:field="*{idreserva}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="reserv: ${listadoTipoReserv}"
 									th:value="${reserv.idreserva}"
 									th:text="${reserv.tiporeservacion}">
+
 							</option>
 						</select>
 						<span class="text-danger" th:text="${validacion}"></span>
@@ -179,18 +183,21 @@ label.error {
 			$("#btn").on("click",function(){
 				$("#formulario").validate({
 					rules:{
+            
 						//idpeli:{required:true,minlength:5,maxlength:5,expresion:true},
 						nombre: {required:true,maxlength:100},
+
+
 						fechaEstreno:{required:true},
 						fechaFinal :{required:true}
 					},
 					messages:{
-						idpeli:{
+						<!--idpeli:{
 							required:"El Campo es requerido.",
 							minlength:"El Minimo son 5 caracteres",
 							maxlength:"El maximo son 5 caracteres.",
 							expresion:"El Formato es con el prefijo 'P' + 4 dígitos (P0000)."
-							},
+							},-->
 						nombre:{
 							required:"El Campo es requerido.",
 							maxlength: "El maximo son 100 caracteres."

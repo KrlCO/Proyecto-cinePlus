@@ -6,11 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 @Data
 @Entity
 @Table(name = "cliente")
 public class Cliente {
+
 	@Id
 	private String idcliente;
 	private String nombre;
@@ -18,5 +20,7 @@ public class Cliente {
 	private String telefono;
 	private String email;
 	private String password;
+
+	private Date fechaRegistro;
 
 }

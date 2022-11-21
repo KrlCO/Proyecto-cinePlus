@@ -16,9 +16,9 @@ import com.proyecto.cineplus.repository.ITipoUsuarioRepository;
 import com.proyecto.cineplus.repository.IUsuarioRepository;
 
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping("/usu")
 public class UsuarioController {
-	
+	/*
 	@Autowired
 	private ITipoUsuarioRepository repo_tipousu;
 	
@@ -89,7 +89,6 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/Editar")
-	
 	public String editarUsuario(@ModelAttribute(name = "usuarios") Usuario usuarios, Model model) {
 		
 		try {
@@ -167,5 +166,7 @@ public class UsuarioController {
 		model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
 		model.addAttribute("listaUsuarios",repo_usu.findAll());
 		model.addAttribute("usuarios", usario);
-	}
+	}*/
 }
+
+
