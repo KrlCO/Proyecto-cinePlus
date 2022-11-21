@@ -58,28 +58,29 @@ label.error {
 					</div>
 
 					<div class="form-group mt-2">
-						<label for="floatingInputValue">ID Cliente :</label> <input
-							type="text" class="form-control" id="cliente"
-							placeholder="Codigo de Cliente" th:field="*{idcliente}" autocomplete="off">
+						<label for="floatingInputValue">Cliente :</label>
+						<select id="tiporeservacion" class="form-select" aria-label="Default select example"
+								th:field="*{idcliente}">
+							<option selected value="-1">[Seleccionar]</option>
+							<option th:each="c: ${listadoCliente}"
+									th:value="${c.idcliente}"
+									th:text="${c.nombre}">
+							</option>
+						</select>
 					</div>
 
 					<div class="form-group mt-2">
 						<label for="floatingInputValue">Tipo de Reserva :</label>
-<<<<<<< HEAD
-						<select id="inputType" class="form-select" aria-label="Default select example"
-								th:field="*{idreserva}">
-							<option selected value="-1">[Seleccionar]</option>
-							<option th:each="p: ${listadoTipoReserv}"
-									th:value="${p.idreserva}"
-									th:text="${p.descripcion}">
-=======
+
+		
+
 						<select id="tiporeservacion" class="form-select" aria-label="Default select example"
-								th:field="*{tiporeservacion}">
+								th:field="*{idreserva}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="reserv: ${listadoTipoReserv}"
 									th:value="${reserv.idreserva}"
 									th:text="${reserv.tiporeservacion}">
->>>>>>> master
+
 							</option>
 						</select>
 						<span class="text-danger" th:text="${validacion}"></span>
@@ -182,8 +183,11 @@ label.error {
 			$("#btn").on("click",function(){
 				$("#formulario").validate({
 					rules:{
-<!--						idpeli:{required:true,minlength:50,maxlength:100,expresion:true},-->
-						nombre: {required:true,maxlength:500},
+            
+						//idpeli:{required:true,minlength:5,maxlength:5,expresion:true},
+						nombre: {required:true,maxlength:100},
+
+
 						fechaEstreno:{required:true},
 						fechaFinal :{required:true}
 					},
