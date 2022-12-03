@@ -34,7 +34,8 @@ public class PeliculaController {
 
 	@Autowired
 	private TipoPeliService tipoPeliService;
-	 @Autowired
+
+	@Autowired
 	private IUsuarioService usuarioService;
 
 	 @Autowired

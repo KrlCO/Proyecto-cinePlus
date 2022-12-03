@@ -1,10 +1,10 @@
 package com.proyecto.cineplus.controllers;
 
 import com.proyecto.cineplus.models.Reservacion;
-import com.proyecto.cineplus.repository.IClienteRepository;
-import com.proyecto.cineplus.repository.IPeliculaRepository;
-import com.proyecto.cineplus.repository.IReservavionRepository;
-import com.proyecto.cineplus.repository.ITiporeservacionRespository;
+import com.proyecto.cineplus.repository.*;
+import com.proyecto.cineplus.service.IUsuarioService;
+import com.proyecto.cineplus.service.PeliculaService;
+import com.proyecto.cineplus.service.ReservacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +26,16 @@ public class ReservacionController {
     private ITiporeservacionRespository repotiporeserv;
 
     @Autowired
-    private IPeliculaRepository repopeli;
+    private PeliculaService repopeli;
+
+    @Autowired
+    private IComestibleRepository repocomes;
 
     @GetMapping("/cargar")
-    public String abrirPagina(@ModelAttribute(name = "reservacion")Reservacion reservacion, Model model){
+    public String abrirPagina(Model model){
         model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoPeliculas", repopeli.findAll());
+        model.addAttribute("listadoComestibles", repocomes.findAll());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
         model.addAttribute("listadoReservacion",reporeserv.findAll());
@@ -40,12 +44,12 @@ public class ReservacionController {
 
     @GetMapping("/listado")
     public String listadoReservacion(Model model){
-
         //model.addAttribute("reservacion", new Reservacion());
         model.addAttribute("listadoCliente", repocliente.findAll());
         model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
         model.addAttribute("listadoReservacion", reporeserv.findAll());
         model.addAttribute("listadoPeliculas", repopeli.findAll());
+        model.addAttribute("listadoComestibles", repocomes.findAll());
         return "ListReservacion";
     }
 
@@ -54,36 +58,40 @@ public class ReservacionController {
 
         if(reservacion != null){
 
-            if (reservacion.getIdreserva() == -1) {
 
+        /*    if (reservacion.getIdreserva() == -1) {
+                // model.addAttribute("validacion", "Selecciona una Reservacion");
                 model.addAttribute("listadoCliente", repocliente.findAll());
+                model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
                 model.addAttribute("listadoReservacion", reporeserv.findAll());
                 model.addAttribute("listadoPeliculas", repopeli.findAll());
-                model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
+                model.addAttribute("listadoComestibles", repocomes.findAll());
                 return "ListReservacion";
-            }
+            }*/
 
             reporeserv.save(reservacion);
-            model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("listadoPeliculas", repopeli.findAll());
+            model.addAttribute("listadoComestibles", repocomes.findAll());
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
+            model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("reservacion", new Reservacion());
-            return "ListReservacion";
+
+            return "MReservacion";
         }
-        return "redirect:/reservacion/listado";
+        return "redirect:/reservacion/cargar";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarReservacion(@PathVariable String id, Model model) {
+    public String editarReservacion(@PathVariable String id, Model model){
 
         Optional<Reservacion> reservacion = reporeserv.findById(id);
 
-        if (reservacion.isPresent()) {
+        if(reservacion.isPresent()){
             model.addAttribute("listadoCliente", repocliente.findAll());
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
             model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("listadoPeliculas", repopeli.findAll());
+            model.addAttribute("listadoComestibles", repocomes.findAll());
             model.addAttribute("reservacion", reservacion);
             return "MReservacion";
         }
@@ -102,8 +110,9 @@ public class ReservacionController {
             model.addAttribute("listadoTipoReserv", repotiporeserv.findAll());
             model.addAttribute("listadoReservacion", reporeserv.findAll());
             model.addAttribute("listadoPeliculas", repopeli.findAll());
+            model.addAttribute("listadoComestibles", repocomes.findAll());
             model.addAttribute("reservacion", reserva);
-           return "MReservacion";
+            return "MReservacion";
         }
 
         return "redirect:/reservacion/listado";
