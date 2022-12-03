@@ -24,105 +24,17 @@ label.error {
 </head>
 <body>
 
-	<nav th:replace="components/nav_main :: nav_main"></nav>
+<nav th:replace="users/template_user :: nav_main"></nav>
 
 
 	<div class="container mt-4">
 
 		<div class="row">
 
-			<!--<div class="col-3 mt-2">
-
-				<h2>Comestible</h2>
-
-
-				<form th:action="@{/comestible/Guardar}" th:object="${comestible}"
-				 id="formulario" method="post">
-
-					<div class="form-group mt-2">
-
-						<label for="codigo">ID :</label> 
-						<input type="text"  class="form-control"  id="idComestible"
-							placeholder="C00000..." th:field="*{idComestible}" >
-
-					</div>
-					
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Descripción :</label> <input
-							type="text" class="form-control" id="descripcion"
-							placeholder="Descripción..." th:field="*{descripcion}">
-
-					</div>
-
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Precio :</label> <input
-							type="number" class="form-control" id="precio"
-							 th:field="*{precio}">
-
-					</div>
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Stock :</label> <input
-							type="text" class="form-control" id="stock"
-							 th:field="*{stock}">
-
-					</div>
-
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue">Tipo Comestible :</label> <select
-							class="form-select" id="comestible" aria-label="Default select example"
-							th:field="*{idTipo}">
-							<option selected value="-1">[Seleccionar]</option>
-							<option th:each="comestible : ${cboComestible}" 
-							th:text="${comestible.descripcion}" th:value="${comestible.id}"></option>
-						</select>
-						<span class="text-danger" th:text="${validacion}"></span>
-						
-					</div>
-
-					<div class="form-group mt-2">
-
-						<label for="floatingInputValue" >Proveedor :</label> <select
-							class="form-select" id="proveedor" aria-label="Default select example"
-							th:field="*{idProveedor}">
-							<option selected value="-1">[Seleccionar]</option>
-							<option th:each="proveedor : ${cboProveedor}"
-							th:text="${proveedor.nombre}" th:value="${proveedor.id_proveedor}"></option>
-						</select>
-						<span class="text-danger" th:text="${validacion2}"></span>
-					</div>
-
-					<div class="form-group mt-2" hidden>
-
-						<label for="floatingInputValue">Estado :</label> <select
-							class="form-select" aria-label="Default select example"
-							th:field="*{estado}">
-							<option value="A">Activo</option>
-						</select>
-
-					</div>
-
-					<div class="mt-2">
-						<button type="submit" id="btn" class="btn btn-primary" style="font-weight: bold">Enviar</button>
-						<a th:href="@{/comestible/listado}" class="btn btn-secondary fw-bold">Refrescar</a>
-					</div>
-				</form>
-				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary"
-					role="alert" th:text="${mensajeCorrecto}"></div>
-			</div>-->
-
 			<div class="col-9">
 				<h1 class="text-center">Comestibles Disponibles </h1>
 <!--					<span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span>-->
-				<div class="mt-2">
+				<div class="mt-2" hidden>
 					<a th:href="@{/comestible/cargar}" class="btn btn-primary fw-bold">Nuevo Producto</a>
 				</div>
 
@@ -173,7 +85,19 @@ label.error {
 
 
 
-
+	<script>
+	  window.watsonAssistantChatOptions = {
+	    integrationID: "5574fd94-84e2-4ee5-98ce-8fe6dbf0f742", // The ID of this integration.
+	    region: "au-syd", // The region your integration is hosted in.
+	    serviceInstanceID: "561997c0-eba0-4390-8e97-385c6dc68c48", // The ID of your service instance.
+	    onLoad: function(instance) { instance.render(); }
+	  };
+	  setTimeout(function(){
+	    const t=document.createElement('script');
+	    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+	    document.head.appendChild(t);
+	  });
+	</script>
 
 
 
