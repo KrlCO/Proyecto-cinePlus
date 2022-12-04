@@ -63,9 +63,9 @@ public class ClienteController {
 			model.addAttribute("listado", repo.findAll());
 			model.addAttribute("cliente", new Cliente());
 			model.addAttribute("cantidad", repo.count());
-			return "ListCliente";
+			return "MCliente";
 		}
-		return "redirect:/cliente/listado";
+		return "redirect:/cliente/cargar";
 	}
 	
 	@GetMapping("/editar/{id}")
